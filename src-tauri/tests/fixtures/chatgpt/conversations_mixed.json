@@ -1,0 +1,110 @@
+[
+  {
+    "id": "g-linear-01",
+    "conversation_id": "g-linear-01",
+    "title": "Rust streaming JSON",
+    "create_time": 1724000000.123456,
+    "update_time": 1724003600.5,
+    "current_node": "n3",
+    "default_model_slug": "gpt-5",
+    "mapping": {
+      "root": { "id": "root", "message": null, "parent": null, "children": ["n1"] },
+      "n1": {
+        "id": "n1", "parent": "root", "children": ["n2"],
+        "message": {
+          "id": "n1", "author": { "role": "system", "name": null, "metadata": {} },
+          "create_time": null, "content": { "content_type": "text", "parts": [""] },
+          "status": "finished_successfully", "weight": 0.0,
+          "metadata": { "is_visually_hidden_from_conversation": true }, "recipient": "all"
+        }
+      },
+      "n2": {
+        "id": "n2", "parent": "n1", "children": ["n3"],
+        "message": {
+          "id": "n2", "author": { "role": "user" }, "create_time": 1724000001.0,
+          "content": { "content_type": "text", "parts": ["How do I stream a huge JSON array in Rust?"] },
+          "status": "finished_successfully", "weight": 1.0, "metadata": {}, "recipient": "all"
+        }
+      },
+      "n3": {
+        "id": "n3", "parent": "n2", "children": [],
+        "message": {
+          "id": "n3", "author": { "role": "assistant" }, "create_time": 1724000010.25,
+          "content": { "content_type": "text", "parts": ["Use a serde Visitor with visit_seq."] },
+          "status": "finished_successfully", "end_turn": true, "weight": 1.0,
+          "metadata": { "model_slug": "gpt-5" }, "recipient": "all"
+        }
+      }
+    }
+  },
+  {
+    "id": "g-branch-02",
+    "title": "Regenerated answer",
+    "create_time": 1725000000,
+    "update_time": 1725000500,
+    "current_node": "b4",
+    "mapping": {
+      "b0": { "id": "b0", "message": null, "parent": null, "children": ["b1"] },
+      "b1": { "id": "b1", "parent": "b0", "children": ["b2", "b3"], "message": { "id": "b1", "author": { "role": "user" }, "create_time": 1725000001, "content": { "content_type": "text", "parts": ["Name ideas for a graph app?"] }, "recipient": "all" } },
+      "b2": { "id": "b2", "parent": "b1", "children": [], "message": { "id": "b2", "author": { "role": "assistant" }, "create_time": 1725000002, "content": { "content_type": "text", "parts": ["Old answer: Brainweb."] }, "recipient": "all" } },
+      "b3": { "id": "b3", "parent": "b1", "children": ["b4"], "message": { "id": "b3", "author": { "role": "assistant" }, "create_time": 1725000100, "content": { "content_type": "text", "parts": ["New answer: Neural Map."] }, "recipient": "all", "weight": 0.0 } },
+      "b4": { "id": "b4", "parent": "b3", "children": [], "message": { "id": "b4", "author": { "role": "user" }, "create_time": 1725000200, "content": { "content_type": "text", "parts": ["I like Neural Map."] }, "recipient": "all" } }
+    }
+  },
+  {
+    "id": "g-tools-03",
+    "title": null,
+    "create_time": 1726000000,
+    "update_time": 1726000900,
+    "current_node": "t8",
+    "mapping": {
+      "t0": { "id": "t0", "message": null, "parent": null, "children": ["t1"] },
+      "t1": { "id": "t1", "parent": "t0", "children": ["t2"], "message": { "id": "t1", "author": { "role": "user" }, "create_time": 1726000001, "content": { "content_type": "user_editable_context", "user_profile": "I build things", "user_instructions": "be brief" }, "metadata": { "is_visually_hidden_from_conversation": true } } },
+      "t2": { "id": "t2", "parent": "t1", "children": ["t3"], "message": { "id": "t2", "author": { "role": "user" }, "create_time": 1726000002, "content": { "content_type": "text", "parts": ["Plot the decay curve with a 14 day half-life and compare it to my usage."] }, "recipient": "all" } },
+      "t3": { "id": "t3", "parent": "t2", "children": ["t4"], "message": { "id": "t3", "author": { "role": "assistant" }, "create_time": 1726000003, "content": { "content_type": "code", "language": "python", "text": "import math" }, "recipient": "python" } },
+      "t4": { "id": "t4", "parent": "t3", "children": ["t5"], "message": { "id": "t4", "author": { "role": "tool", "name": "python" }, "create_time": 1726000004, "content": { "content_type": "execution_output", "text": "ok" }, "recipient": "all" } },
+      "t5": { "id": "t5", "parent": "t4", "children": ["t6"], "message": { "id": "t5", "author": { "role": "assistant" }, "create_time": 1726000005, "content": { "content_type": "thoughts", "thoughts": [{ "summary": "s", "content": "c" }] }, "recipient": "all" } },
+      "t6": { "id": "t6", "parent": "t5", "children": ["t7"], "message": { "id": "t6", "author": { "role": "tool", "name": "browser" }, "create_time": 1726000006, "content": { "content_type": "tether_browsing_display", "result": "r", "summary": "s" }, "recipient": "all" } },
+      "t7": { "id": "t7", "parent": "t6", "children": ["t8"], "message": { "id": "t7", "author": { "role": "assistant" }, "create_time": 1726000007, "content": { "content_type": "text", "parts": ["{\"name\":\"doc\"}"] }, "recipient": "canmore.create_textdoc" } },
+      "t8": { "id": "t8", "parent": "t7", "children": [], "message": { "id": "t8", "author": { "role": "assistant" }, "create_time": null, "content": { "content_type": "text", "parts": ["Here is the curve: it halves every 14 days."] }, "status": "in_progress", "recipient": "all" } }
+    }
+  },
+  {
+    "id": "g-multi-04",
+    "title": "Photo and voice",
+    "create_time": 1727000000,
+    "update_time": 1727000100,
+    "current_node": "v3",
+    "mapping": {
+      "v0": { "id": "v0", "message": null, "parent": null, "children": ["v1"] },
+      "v1": { "id": "v1", "parent": "v0", "children": ["v2"], "message": { "id": "v1", "author": { "role": "user" }, "create_time": 1727000001, "content": { "content_type": "multimodal_text", "parts": [{ "content_type": "image_asset_pointer", "asset_pointer": "file-service://file-AB12", "width": 800, "height": 600 }, "What is this servo?"] }, "recipient": "all" } },
+      "v2": { "id": "v2", "parent": "v1", "children": ["v3"], "message": { "id": "v2", "author": { "role": "user" }, "create_time": 1727000002, "content": { "content_type": "multimodal_text", "parts": [{ "content_type": "audio_transcription", "direction": "in", "text": "Also, why does it jitter?" }, { "content_type": "audio_asset_pointer", "asset_pointer": "sediment://file_1" }, { "content_type": "real_time_user_audio_video_asset_pointer" }] }, "recipient": "all" } },
+      "v3": { "id": "v3", "parent": "v2", "children": [], "message": { "id": "v3", "author": { "role": "assistant" }, "create_time": 1727000003, "content": { "content_type": "multimodal_text", "parts": [{ "content_type": "audio_transcription", "direction": "out", "text": "It is an SG90; jitter is usually power." }] }, "recipient": "all" } }
+    }
+  },
+  {
+    "id": "g-cycle-05",
+    "title": "",
+    "create_time": 1728000000,
+    "update_time": 1728000000,
+    "current_node": "missing-node",
+    "mapping": {
+      "x0": { "id": "x0", "message": null, "parent": null, "children": ["x1"] },
+      "x1": { "id": "x1", "parent": "x0", "children": ["x2", "x3"], "message": { "id": "x1", "author": { "role": "user" }, "create_time": 1728000001, "content": { "content_type": "text", "parts": ["Which branch wins without current_node?"] }, "recipient": "all" } },
+      "x2": { "id": "x2", "parent": "x1", "children": [], "message": { "id": "x2", "author": { "role": "assistant" }, "create_time": 1728000002, "content": { "content_type": "text", "parts": ["Older sibling"] }, "recipient": "all" } },
+      "x3": { "id": "x3", "parent": "x1", "children": [], "message": { "id": "x3", "author": { "role": "assistant" }, "create_time": 1728000009, "content": { "content_type": "text", "parts": ["Newest sibling"] }, "recipient": "all" } }
+    }
+  },
+  {
+    "id": "g-loop-06",
+    "title": "Corrupted parent loop",
+    "create_time": 1728100000,
+    "update_time": 1728100000,
+    "current_node": "l2",
+    "mapping": {
+      "l1": { "id": "l1", "parent": "l2", "children": ["l2"], "message": { "id": "l1", "author": { "role": "user" }, "create_time": 1728100001, "content": { "content_type": "text", "parts": ["loop a"] }, "recipient": "all" } },
+      "l2": { "id": "l2", "parent": "l1", "children": ["l1"], "message": { "id": "l2", "author": { "role": "assistant" }, "create_time": 1728100002, "content": { "content_type": "text", "parts": ["loop b"] }, "recipient": "all" } }
+    }
+  },
+  { "id": "g-bad-07", "title": "Bad mapping", "mapping": ["not", "an", "object"] }
+]

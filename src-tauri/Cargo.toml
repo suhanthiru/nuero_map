@@ -1,0 +1,71 @@
+[package]
+name = "neural-map"
+version = "0.1.0"
+description = "A personal idea graph built from your AI chat history"
+authors = ["suhanthiru"]
+edition = "2021"
+rust-version = "1.85"
+
+[lib]
+# The `_lib` suffix keeps the lib name distinct from the bin name (cargo#8519 on Windows).
+name = "neural_map_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+# App shell
+tauri = { version = "2.12", features = [] }
+tauri-plugin-opener = "2.6"
+tauri-plugin-dialog = "2.8"
+tauri-plugin-clipboard-manager = "2.4"
+tauri-plugin-notification = "2.5"
+tauri-plugin-single-instance = "2.5"
+
+# Storage
+rusqlite = { version = "0.40", features = ["bundled"] }
+sqlite-vec = "0.1.9"
+
+# Local embeddings (static ONNX Runtime fetched at build time; no image models)
+fastembed = { version = "=7.1.0", default-features = false, features = ["ort-download-binaries-native-tls", "hf-hub-native-tls"] }
+
+# Network: Anthropic API client and the Gemini capture listener
+reqwest = { version = "0.13", default-features = false, features = ["native-tls", "json", "stream", "http2", "charset"] }
+tokio = { version = "1.53", features = ["rt-multi-thread", "macros", "sync", "time", "fs"] }
+axum = "0.8"
+
+# Secrets
+keyring = "4.2"
+
+# Import + utilities
+zip = { version = "8.6", default-features = false, features = ["deflate"] }
+# Reading Word .docx documents (already in the tree through plist)
+quick-xml = "0.42"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["raw_value"] }
+thiserror = "2"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+sha2 = "0.11"
+rand = "0.10"
+subtle = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+tempfile = "3"
+wiremock = "0.6"
+tower = { version = "0.5", features = ["util"] }
+
+[profile.dev.package."*"]
+# Tokenizers and ONNX pre/post-processing are painfully slow unoptimized.
+opt-level = 2
+
+# Read the optimization guideline for more details: https://tauri.app/concept/size/#cargo-configuration
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true

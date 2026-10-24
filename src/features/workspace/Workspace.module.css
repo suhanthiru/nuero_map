@@ -1,0 +1,780 @@
+.workspace {
+  /* One header row runs across the ribbon, sidebars and every pane's tab bar. */
+  --tabbar-height: 40px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
+  background: var(--paper-0);
+  color: var(--ink);
+  font-size: var(--text-md);
+}
+
+.skip {
+  position: absolute;
+  top: -40px;
+  left: var(--space-3);
+  z-index: 60;
+  padding: 6px 12px;
+  border-radius: var(--radius-1);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.skip:focus {
+  top: var(--space-2);
+}
+
+/* Ribbon */
+.ribbon {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 8px;
+  border-right: 1px solid var(--line);
+  background: var(--paper-1);
+}
+
+.ribbonTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  height: var(--tabbar-height);
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ribbonBottom {
+  margin-top: auto;
+}
+
+.ribbonGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ribbonButton,
+.iconButton,
+.newTab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.ribbonButton:hover,
+.iconButton:hover:not(:disabled),
+.newTab:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.iconButton:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.iconButton {
+  width: 26px;
+  height: 26px;
+}
+
+.iconButton[aria-pressed="true"] {
+  color: var(--ink-2);
+}
+
+/* Sidebars */
+.leftSidebar,
+.rightSidebar {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--paper-1);
+}
+
+.leftSidebar {
+  border-right: 1px solid var(--line);
+}
+
+.rightSidebar {
+  border-left: 1px solid var(--line);
+}
+
+.paneTabs {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 2px;
+  height: var(--tabbar-height);
+  padding: 0 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.paneTab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.paneTab:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.paneTab[aria-selected="true"] {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 4px 6px 16px;
+}
+
+.paneHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 6px 6px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.paneAction {
+  padding: 1px 6px;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.paneAction:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.paneEmpty {
+  padding: 8px 12px;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* Explorer nav buttons: sort, collapse all, reveal. */
+.navButtons {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 6px 8px;
+}
+
+.navButtons .iconButton {
+  width: 28px;
+  height: 26px;
+}
+
+/* Vault-style footer at the bottom of the left sidebar. */
+.vaultFooter {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 2px;
+  padding: 6px 8px;
+  border-top: 1px solid var(--line);
+}
+
+.vaultName {
+  display: inline-flex;
+  align-items: center;
+  flex: 1;
+  gap: 6px;
+  min-width: 0;
+  padding: 3px 6px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.vaultName svg {
+  flex: none;
+  color: var(--muted);
+}
+
+/* Topic tree */
+.tree,
+.treeItems,
+.hits,
+.linkList,
+.outline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.treeItems {
+  margin-left: 13px;
+  padding-left: 4px;
+  border-left: 1px solid var(--line);
+}
+
+.folder,
+.treeItem,
+.outlineItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 3px 6px;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  text-align: left;
+  cursor: pointer;
+}
+
+.folder {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.folder:hover,
+.treeItem:hover,
+.outlineItem:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.treeItemActive {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.folderCount {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.treeTitle {
+  overflow: hidden;
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.treeAlive {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.paneSearch {
+  margin: 4px 6px 8px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-1);
+  background: var(--paper-0);
+  font-size: var(--text-sm);
+}
+
+.hit,
+.linkItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.hit:hover,
+.linkItem:hover {
+  background: var(--paper-2);
+}
+
+.hitTitle,
+.linkTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.hitMeta {
+  overflow: hidden;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.linkQuote {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: var(--text-xs);
+  color: var(--ai-text);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Main area */
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.main:focus {
+  outline: none;
+}
+
+/* Side-by-side panes */
+.panes {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.editorPane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.divider {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  width: 7px;
+  margin: 0 -3px;
+  background: linear-gradient(var(--line), var(--line)) center / 1px 100% no-repeat;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.divider:hover,
+.divider:focus-visible {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 2px 100%;
+}
+
+.divider:focus-visible {
+  outline-offset: -2px;
+}
+
+.tabBar {
+  display: flex;
+  align-items: flex-end;
+  flex: none;
+  gap: 4px;
+  height: var(--tabbar-height);
+  padding: 0 8px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-1);
+}
+
+.tabBar > .iconButton {
+  align-self: center;
+}
+
+.tabBarSpacer {
+  flex: 1;
+}
+
+.tabs {
+  display: flex;
+  gap: 2px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 1 200px;
+  min-width: 90px;
+  height: 31px;
+  margin-bottom: -1px;
+  padding: 0 6px 0 10px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-radius: var(--radius-2) var(--radius-2) 0 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.tab:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.tabActive,
+.tabActive:hover {
+  border-color: var(--line);
+  background: var(--paper-0);
+  color: var(--ink);
+}
+
+/* The current tab of a pane that doesn't have focus. */
+.tabActiveIdle,
+.tabActiveIdle:hover {
+  color: var(--ink-2);
+}
+
+.tabIcon {
+  flex: none;
+}
+
+.tabTitle {
+  overflow: hidden;
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tabClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  color: var(--muted);
+  opacity: 0;
+  cursor: pointer;
+}
+
+.tab:hover .tabClose,
+.tabActive .tabClose {
+  opacity: 1;
+}
+
+.tabClose:hover {
+  background: var(--line);
+  color: var(--ink);
+}
+
+/* A pinned tab always shows its pin (in place of ×); clicking it unpins. */
+.tabPin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.tabPin:hover {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.tabPinned .tabTitle {
+  font-weight: 500;
+}
+
+.newTab {
+  align-self: center;
+  width: 26px;
+  height: 26px;
+}
+
+.viewHeader {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 36px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-0);
+}
+
+.viewTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  padding-left: 6px;
+  font-size: var(--text-sm);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.viewTitleText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.viewActions {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 2px;
+}
+
+.viewCrumb {
+  flex: none;
+  color: var(--muted);
+  text-transform: capitalize;
+}
+
+.viewHost {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.viewPanel {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+}
+
+.viewPanel:focus {
+  outline: none;
+}
+
+.statusBar {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: 3px 10px;
+  border-top: 1px solid var(--line);
+  background: var(--paper-1);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.statusItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusLive:empty {
+  display: none;
+}
+
+.statusButton {
+  margin: -1px -4px;
+  padding: 1px 4px;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.statusButton:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Quick switcher */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  padding-top: 12vh;
+  background: rgb(0 0 0 / 0.45);
+}
+
+.switcher {
+  display: flex;
+  flex-direction: column;
+  width: min(36rem, 92vw);
+  max-height: 60vh;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-2);
+  background: var(--paper-1);
+  box-shadow: var(--shadow-1);
+}
+
+.switcherInput {
+  padding: 12px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  font-size: var(--text-lg);
+  outline: none;
+}
+
+.switcherList {
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.switcherItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: var(--radius-1);
+  font-size: var(--text-md);
+  cursor: pointer;
+}
+
+.switcherItem[aria-selected="true"] {
+  background: var(--paper-2);
+}
+
+.switcherTitle {
+  flex: 1;
+}
+
+.switcherAlias {
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.switcherHint {
+  padding: 6px 12px;
+  border-top: 1px solid var(--line);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.hotkey {
+  display: inline-flex;
+  flex: none;
+  gap: 3px;
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.hotkey kbd,
+.switcherHint kbd {
+  padding: 0 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}
+
+/* Keyboard shortcuts dialog */
+.shortcuts {
+  width: min(40rem, 92vw);
+  max-height: 76vh;
+}
+
+.dialogHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 10px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dialogTitle {
+  font-size: var(--text-lg);
+}
+
+.shortcutsBody {
+  overflow-y: auto;
+  padding: 4px 16px 12px;
+}
+
+.shortcutsGroup {
+  margin: 12px 0 4px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.shortcutList {
+  margin: 0;
+}
+
+.shortcutRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--text-sm);
+}
+
+.shortcutRow dt {
+  flex: 1;
+}
+
+.shortcutRow dd {
+  margin: 0;
+}

@@ -1,0 +1,348 @@
+/* Neural Map design tokens.
+   Default themes follow an Obsidian-like look: charcoal (dark) or white (light) surfaces,
+   lighter side panels, a violet accent, Inter everywhere. The original warm paper themes
+   remain as alternates. Component CSS only uses these names, never raw colors. */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* surfaces: main pane, side panels/cards, hover wells */
+  --paper-0: #1e1e1e;
+  --paper-1: #262626;
+  --paper-2: #2f2f2f;
+  --line: #363636;
+  --line-strong: #474747;
+
+  /* text */
+  --ink: #dadada;
+  --ink-2: #bababa;
+  --muted: #999999;
+
+  /* accent (links, primary actions, focus, highlights); white on it is 4.6:1 */
+  --accent: #7c5ce6;
+  --accent-text: #a68af9;
+  --on-accent: #ffffff;
+  --rust: var(--accent-text);
+  --rust-2: #bba6fb;
+  --orange: var(--accent-text);
+  --ochre: #8a8a8a;
+
+  /* voices: the user's words are normal text, the AI's a muted lavender */
+  --user-text: var(--ink);
+  --user-bar: #8a8a8a;
+  --ai-text: #b9b1dc;
+  --ai-bar: #5f4fb8;
+
+  /* topic states (validated on #1e1e1e; always paired with a shape or label) */
+  --state-active: #cf6536;
+  --state-parked: #538bc9;
+  --state-done: #37a073;
+  --state-dead: #6b6b6b;
+
+  /* graph color groups: validated categorical order (first three pass all-pairs) */
+  --group-1: #3987e5;
+  --group-2: #d95926;
+  --group-3: #199e70;
+  --group-4: #c98500;
+  --group-5: #d55181;
+  --group-6: #9085e9;
+
+  /* note callouts (title text; validated ≥4.5:1 on a 10% tint of the page) */
+  --callout-blue: #5b9cec;
+  --callout-orange: #e8784a;
+  --callout-teal: #2bb383;
+  --callout-amber: #c98500;
+  --callout-pink: #e47aa0;
+  --callout-violet: #9085e9;
+  --callout-red: #fc6b70;
+  --callout-green: #44cf6e;
+  --callout-gray: #999999;
+
+  /* feedback */
+  --danger: #fb464c;
+  --success: #44cf6e;
+  --selection: rgb(139 108 239 / 0.28);
+  --focus: var(--accent-text);
+
+  /* graph paint (read by the canvas painter) */
+  --graph-bg: var(--paper-0);
+  --graph-node: #a3a3a3;
+  --graph-edge-explicit: rgb(220 220 220 / 0.34);
+  --graph-edge-cooc: rgb(170 170 170 / 0.24);
+  --graph-edge-semantic: rgb(150 150 150 / 0.16);
+  /* a [[link]] you wrote: teal, ≥3:1 on the page and apart from the grey chat edges */
+  --graph-edge-note: rgb(63 191 160 / 0.6);
+  --graph-label: var(--ink);
+  --graph-label-halo: var(--paper-0);
+  --graph-node-stroke: var(--paper-0);
+
+  /* type */
+  --font-ui: "Inter Variable", "Segoe UI", system-ui, sans-serif;
+  --font-read: var(--font-ui);
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  /* small section labels: Obsidian-style sentence case */
+  --label-font: var(--font-ui);
+  --label-case: none;
+  --label-tracking: 0;
+  --label-weight: 600;
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+
+  /* shape */
+  --radius-1: 4px;
+  --radius-2: 8px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --shadow-1: 0 2px 8px rgb(0 0 0 / 0.35);
+  --ribbon-width: 44px;
+  --sidebar-width: 15.5rem;
+  --right-width: 18.5rem;
+  --nav-width: 13rem;
+  --drawer-width: 440px;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --paper-0: #ffffff;
+  --paper-1: #f6f6f6;
+  --paper-2: #ececec;
+  --line: #e0e0e0;
+  --line-strong: #cfcfcf;
+  --ink: #222222;
+  --ink-2: #5c5c5c;
+  --muted: #6e6e6e;
+  --accent: #7a5af0;
+  --accent-text: #6a48e8;
+  --on-accent: #ffffff;
+  --rust-2: #5534d6;
+  --ochre: #8a8a8a;
+  --user-bar: #8a8a8a;
+  --ai-text: #5a4a9c;
+  --ai-bar: #b6a6f5;
+  --state-active: #b8481c;
+  --state-parked: #2c68a8;
+  --state-done: #1f8a62;
+  --state-dead: #ababab;
+  --group-1: #2a78d6;
+  --group-2: #eb6834;
+  --group-3: #1baf7a;
+  --group-4: #eda100;
+  --group-5: #e87ba4;
+  --group-6: #6250d6;
+  --callout-blue: #1f64b8;
+  --callout-orange: #b84a17;
+  --callout-teal: #137a55;
+  --callout-amber: #8f5f00;
+  --callout-pink: #b2386a;
+  --callout-violet: #6250d6;
+  --callout-red: #c0263a;
+  --callout-green: #187a40;
+  --callout-gray: #5c5c5c;
+  --danger: #e93147;
+  --success: #08b94e;
+  --selection: rgb(122 90 240 / 0.2);
+  --graph-node: #8f8f8f;
+  --graph-edge-explicit: rgb(34 34 34 / 0.3);
+  --graph-edge-cooc: rgb(34 34 34 / 0.18);
+  --graph-edge-semantic: rgb(34 34 34 / 0.12);
+  --graph-edge-note: rgb(19 122 85 / 0.7);
+  --shadow-1: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+
+/* Original warm paper themes (alternates). */
+:root[data-theme="paper"],
+:root[data-theme="paper-dark"] {
+  --font-ui: "IBM Plex Sans", system-ui, sans-serif;
+  --font-read: "Newsreader Variable", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --label-font: var(--font-mono);
+  --label-case: uppercase;
+  --label-tracking: 0.08em;
+  --label-weight: 500;
+  --rust: #a5412a;
+  --orange: #d9772b;
+  --focus: var(--orange);
+}
+
+:root[data-theme="paper"] {
+  color-scheme: light;
+  --paper-0: #f2e8d5;
+  --paper-1: #f8f1e4;
+  --paper-2: #e8dcc4;
+  --line: #d6c6a8;
+  --line-strong: #b9a889;
+  --ink: #2b2118;
+  --ink-2: #4a3d31;
+  --muted: #6b5a49;
+  --accent: #a5412a;
+  --accent-text: #a5412a;
+  --on-accent: #f8f1e4;
+  --rust-2: #85331d;
+  --ochre: #8f7550;
+  --user-bar: #2b2118;
+  --ai-text: #8b5236;
+  --ai-bar: #c98a5e;
+  --state-active: #b8481c;
+  --state-parked: #2c68a8;
+  --state-done: #1f8a62;
+  --state-dead: #a89a85;
+  --group-1: #2a78d6;
+  --group-2: #eb6834;
+  --group-3: #1baf7a;
+  --group-4: #eda100;
+  --group-5: #e87ba4;
+  --group-6: #6250d6;
+  --callout-blue: #1a5499;
+  --callout-orange: #9a3d12;
+  --callout-teal: #0f6647;
+  --callout-amber: #7a5100;
+  --callout-pink: #962e58;
+  --callout-violet: #5040b8;
+  --callout-red: #a31f31;
+  --callout-green: #146536;
+  --callout-gray: #4a3d31;
+  --danger: #9e2b25;
+  --success: #5e7a4a;
+  --selection: rgb(181 72 43 / 0.18);
+  --graph-node: #8f7550;
+  --graph-edge-explicit: rgb(43 33 24 / 0.38);
+  --graph-edge-cooc: rgb(181 72 43 / 0.32);
+  --graph-edge-semantic: rgb(124 107 90 / 0.22);
+  --graph-edge-note: rgb(15 102 71 / 0.7);
+  --graph-node-stroke: var(--paper-1);
+  --shadow-1: 0 1px 2px rgb(43 33 24 / 0.08), 0 4px 12px rgb(43 33 24 / 0.06);
+}
+
+:root[data-theme="paper-dark"] {
+  color-scheme: dark;
+  --paper-0: #1e1915;
+  --paper-1: #262019;
+  --paper-2: #2f2820;
+  --line: #3e342a;
+  --line-strong: #55473a;
+  --ink: #ede3d2;
+  --ink-2: #cfc2ad;
+  --muted: #a3937d;
+  --accent: #d9704f;
+  --accent-text: #d9704f;
+  --on-accent: #1e1915;
+  --rust: #d9704f;
+  --rust-2: #e6866a;
+  --orange: #e8963f;
+  --ochre: #b99b6b;
+  --user-bar: #ede3d2;
+  --ai-text: #c99272;
+  --ai-bar: #8b5236;
+  --state-active: #cf6536;
+  --state-parked: #538bc9;
+  --state-done: #37a073;
+  --state-dead: #6b5d4e;
+  --group-1: #3987e5;
+  --group-2: #d95926;
+  --group-3: #199e70;
+  --group-4: #c98500;
+  --group-5: #d55181;
+  --group-6: #9085e9;
+  --danger: #fb464c;
+  --success: #44cf6e;
+  --selection: rgb(217 112 79 / 0.22);
+  --graph-node: #b99b6b;
+  --graph-edge-explicit: rgb(237 227 210 / 0.3);
+  --graph-edge-cooc: rgb(217 112 79 / 0.35);
+  --graph-edge-semantic: rgb(154 139 118 / 0.22);
+  --graph-edge-note: rgb(63 191 160 / 0.6);
+  --graph-node-stroke: var(--paper-0);
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 14px rgb(0 0 0 / 0.35);
+}
+
+/* Swatches for the accent picker: each preset's own color, whatever the current accent. */
+:root {
+  --swatch-violet: #7c5ce6;
+  --swatch-blue: #2f6fd0;
+  --swatch-teal: #13806a;
+  --swatch-orange: #c4511e;
+  --swatch-pink: #c23a78;
+  --swatch-green: #2e7d3a;
+}
+
+/* Accent presets (Settings → Appearance), validated like the defaults: white on --accent
+   and --accent-text on every surface ≥4.5:1, --accent against the page ≥3:1. The paper
+   themes keep their rust accent. Light overrides come second so they win. */
+:root:not([data-theme^="paper"])[data-accent="blue"] {
+  --accent: #2f6fd0;
+  --accent-text: #6aa6f0;
+  --rust-2: #8dbaf3;
+  --selection: rgb(47 111 208 / 0.3);
+}
+
+:root:not([data-theme^="paper"])[data-accent="teal"] {
+  --accent: #13806a;
+  --accent-text: #3fbfa0;
+  --rust-2: #6fd3ba;
+  --selection: rgb(19 128 106 / 0.32);
+}
+
+:root:not([data-theme^="paper"])[data-accent="orange"] {
+  --accent: #c4511e;
+  --accent-text: #f08a5a;
+  --rust-2: #f5a882;
+  --selection: rgb(196 81 30 / 0.3);
+}
+
+:root:not([data-theme^="paper"])[data-accent="pink"] {
+  --accent: #c23a78;
+  --accent-text: #f27bb0;
+  --rust-2: #f69cc6;
+  --selection: rgb(194 58 120 / 0.3);
+}
+
+:root:not([data-theme^="paper"])[data-accent="green"] {
+  --accent: #2e7d3a;
+  --accent-text: #5fca73;
+  --rust-2: #86d995;
+  --selection: rgb(46 125 58 / 0.32);
+}
+
+:root[data-theme="light"][data-accent="blue"] {
+  --accent: #2867c7;
+  --accent-text: #1f5fbf;
+  --rust-2: #174d9c;
+  --selection: rgb(40 103 199 / 0.2);
+}
+
+:root[data-theme="light"][data-accent="teal"] {
+  --accent: #0f7a64;
+  --accent-text: #0d6e5a;
+  --rust-2: #0a5a49;
+  --selection: rgb(15 122 100 / 0.2);
+}
+
+:root[data-theme="light"][data-accent="orange"] {
+  --accent: #c2491a;
+  --accent-text: #b3410f;
+  --rust-2: #93350c;
+  --selection: rgb(194 73 26 / 0.18);
+}
+
+:root[data-theme="light"][data-accent="pink"] {
+  --accent: #c2336f;
+  --accent-text: #b02a63;
+  --rust-2: #8f2251;
+  --selection: rgb(194 51 111 / 0.18);
+}
+
+:root[data-theme="light"][data-accent="green"] {
+  --accent: #2b7a36;
+  --accent-text: #22702e;
+  --rust-2: #1a5a24;
+  --selection: rgb(43 122 54 / 0.2);
+}

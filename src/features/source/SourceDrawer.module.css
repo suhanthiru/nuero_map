@@ -1,0 +1,120 @@
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 26px;
+  width: min(var(--drawer-width), 90vw);
+  overflow-y: auto;
+  padding: var(--space-5) var(--space-5) var(--space-6);
+  border-left: 1px solid var(--line);
+  background: var(--paper-1);
+  box-shadow: var(--shadow-1);
+  z-index: 20;
+}
+
+.close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.header {
+  padding-right: var(--space-5);
+  margin-bottom: var(--space-4);
+}
+
+.eyebrow {
+  font-family: var(--label-font);
+  font-weight: var(--label-weight);
+  font-size: var(--text-xs);
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-case);
+  color: var(--muted);
+}
+
+.title {
+  margin: 2px 0 var(--space-3);
+  font-family: var(--font-read);
+  font-size: var(--text-xl);
+  line-height: 1.2;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.status {
+  color: var(--muted);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.message {
+  padding: var(--space-2) var(--space-3);
+  border-left: 2px solid var(--user-bar);
+  border-radius: 0 var(--radius-1) var(--radius-1) 0;
+}
+
+.message[data-speaker="assistant"] {
+  border-left: 1px solid var(--ai-bar);
+}
+
+.focus {
+  background: var(--selection);
+}
+
+.messageMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.speaker {
+  font-variant: small-caps;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+}
+
+.message[data-speaker="assistant"] .speaker {
+  color: var(--ai-text);
+}
+
+.messageText {
+  font-family: var(--font-read);
+  font-size: var(--text-md);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--user-text);
+}
+
+.message[data-speaker="assistant"] .messageText {
+  color: var(--ai-text);
+}

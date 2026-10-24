@@ -1,0 +1,129 @@
+/* Sits under Linked mentions and matches its look (head, count, rows on paper-1). */
+.section {
+  margin-top: 1.5em;
+}
+
+.status {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.status:empty {
+  display: none;
+}
+
+.groups,
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.group {
+  margin-bottom: 8px;
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 2px 4px 2px 32px;
+  border-radius: var(--radius-1);
+}
+
+.groupHead:hover {
+  background: var(--paper-1);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 4px 0 8px 32px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 10px 12px;
+  border-radius: var(--radius-1);
+  background: var(--paper-1);
+}
+
+.rowBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0 0 2px;
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.metaLink {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--accent-text);
+  cursor: pointer;
+}
+
+.metaLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.snippet {
+  margin: 0;
+  font-size: var(--text-md);
+  line-height: 1.5;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.mark {
+  padding: 0 2px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  color: var(--ink);
+}
+
+.linkButton {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-1);
+  background: var(--paper-0);
+  font-size: var(--text-sm);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.linkButton:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.linkButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+@media (forced-colors: active) {
+  .mark {
+    background: Mark;
+    color: MarkText;
+  }
+}

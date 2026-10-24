@@ -1,0 +1,764 @@
+/* The topic page reads like a note: one readable column, an inline title, properties,
+   then the body. Sizes follow a notes-app type scale (h1 1.8em, h2 1.6em, ...). */
+
+.page {
+  container-type: inline-size;
+  --line-width: 44rem;
+  --gutter: 2rem;
+  max-width: calc(var(--line-width) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 3rem var(--gutter) 6rem;
+  font-size: var(--text-lg);
+  line-height: 1.55;
+}
+
+:global(html[data-readable="off"]) .page {
+  max-width: none;
+}
+
+.loading {
+  padding: var(--space-6);
+  color: var(--muted);
+}
+
+.muted {
+  font-size: var(--text-md);
+  color: var(--muted);
+}
+
+.error {
+  font-size: var(--text-md);
+  color: var(--danger);
+}
+
+.inlineLink {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--text-md);
+  color: var(--accent-text);
+  cursor: pointer;
+}
+
+.inlineLink:hover:not(:disabled) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.inlineLink:disabled {
+  color: var(--muted);
+  cursor: default;
+}
+
+/* Inline title: the topic's name, editable in place (Enter renames). */
+.inlineTitle {
+  margin: 0 0 0.6em;
+  font-size: 1.8em;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.titleInput {
+  display: block;
+  width: 100%;
+  min-height: 1.2em;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  color: var(--ink);
+  resize: none;
+  overflow: hidden;
+  field-sizing: content;
+}
+
+.titleInput:focus {
+  outline: none;
+}
+
+.titleInput:focus-visible {
+  box-shadow: -10px 0 0 -7px var(--accent);
+}
+
+.titleHint {
+  margin: -0.4em 0 0.8em;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* Properties */
+.properties {
+  margin-bottom: 1.75em;
+  padding-bottom: 0.75em;
+  border-bottom: 1px solid var(--line);
+}
+
+.propertiesHead {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 4px -22px;
+  padding: 2px 4px;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.propertiesHead:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.chevron {
+  color: var(--muted);
+  transition: transform 120ms ease;
+}
+
+[aria-expanded="false"] > .chevron {
+  transform: rotate(-90deg);
+}
+
+.propList {
+  margin: 0;
+}
+
+.prop {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-2);
+  min-height: 30px;
+  padding: 3px 4px;
+  border-radius: var(--radius-1);
+}
+
+.prop:hover {
+  background: var(--paper-1);
+}
+
+.propKey {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  font-size: var(--text-md);
+  color: var(--muted);
+}
+
+.propKey svg {
+  flex: none;
+}
+
+.propValue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  min-width: 0;
+  min-height: 24px;
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--ink);
+}
+
+.propNote {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: var(--paper-2);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.stateControl {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.stateOption {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.stateOption:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.stateOption[aria-checked="true"] {
+  border-color: var(--line-strong);
+  background: var(--paper-2);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.aliveWord {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.aliveMeter {
+  display: inline-block;
+  width: 7rem;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.aliveMeter span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--state-active);
+}
+
+.activity {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.bar {
+  fill: var(--ink-2);
+}
+
+.barEmpty {
+  fill: var(--line);
+}
+
+/* Sections: headings with a fold arrow in the left gutter, like a notes app. */
+.section {
+  margin-top: 2.25em;
+}
+
+.sectionHead {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: 0.6em;
+}
+
+.fold {
+  position: absolute;
+  top: 50%;
+  left: -26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.sectionHead:hover .fold,
+.fold:focus-visible,
+.fold[aria-expanded="false"] {
+  opacity: 1;
+}
+
+.fold:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.h2 {
+  font-size: 1.6em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.sectionActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.collapsedHint {
+  color: var(--muted);
+}
+
+/* Callouts (current state, pinned quotes, and > [!type] in notes) */
+.callout {
+  --callout-color: var(--accent-text);
+  margin: 1.25em 0;
+  padding: 12px 14px 14px 22px;
+  border-radius: var(--radius-1);
+  background: color-mix(in srgb, var(--callout-color) 10%, transparent);
+}
+
+.callout[data-callout="quote"] {
+  --callout-color: var(--callout-gray);
+}
+
+.calloutTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--callout-color);
+  font-weight: 600;
+}
+
+.calloutTitle h2 {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.calloutTitle svg {
+  flex: none;
+}
+
+.calloutActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  font-weight: 400;
+}
+
+.calloutBody {
+  margin-top: 8px;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.iconButton:hover:not(:disabled) {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.iconButton:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Current state */
+.stateLines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding-left: 1.4em;
+  font-family: var(--font-read);
+}
+
+.stateLine::marker {
+  color: var(--muted);
+}
+
+.cite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5em;
+  height: 1.5em;
+  margin-left: 3px;
+  padding: 0 4px;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  font-size: 0.68em;
+  font-weight: 600;
+  color: var(--accent-text);
+  vertical-align: 0.4em;
+  cursor: pointer;
+}
+
+.cite:hover {
+  background: var(--selection);
+  text-decoration: underline;
+}
+
+.versionRow {
+  margin-top: 10px;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.versionPicker select {
+  padding: 1px 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-1);
+  background: var(--paper-0);
+  font-size: var(--text-sm);
+}
+
+.oldNotice {
+  margin-bottom: 8px;
+  font-size: var(--text-md);
+}
+
+/* My notes */
+.notes {
+  margin-top: 1.75em;
+}
+
+.noteHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.5em;
+  color: var(--muted);
+}
+
+.noteLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.noteStatus {
+  font-size: var(--text-sm);
+}
+
+.noteHead .modeButton {
+  margin-left: auto;
+}
+
+.modeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border: 0;
+  border-radius: var(--radius-1);
+  background: transparent;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.modeButton:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.emptyNote {
+  display: block;
+  width: 100%;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--muted);
+  text-align: left;
+  cursor: text;
+}
+
+.emptyNote:hover {
+  color: var(--ink-2);
+}
+
+/* Pinned quotes */
+.gems {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gem {
+  margin: 0 0 12px;
+}
+
+.entryActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: 8px;
+}
+
+/* Timeline: a list with an indentation guide, like nested bullets in a note. */
+.month {
+  margin-top: 1.5em;
+}
+
+.monthLabel {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin-bottom: 0.4em;
+  padding: 4px 0;
+  background: var(--paper-0);
+  font-size: 1.25em;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.entries {
+  margin: 0;
+  padding: 0 0 0 1.4em;
+  list-style: none;
+}
+
+.entry {
+  position: relative;
+  padding: 6px 0 14px 0.9em;
+  border-left: 1px solid var(--line);
+}
+
+.entry::before {
+  content: "";
+  position: absolute;
+  top: calc(6px + 0.55em);
+  left: -3.5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.entryHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+
+.entryTitle {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.6em;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--accent-text);
+}
+
+.entryDate {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.entrySummary {
+  margin: 2px 0 8px;
+  color: var(--ink-2);
+}
+
+.restated {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+  padding: 0 0 0 var(--space-3);
+  list-style: none;
+  opacity: 0.85;
+}
+
+/* Linked mentions: the backlinks panel at the foot of a note. */
+.mentions {
+  margin-top: 3em;
+  padding-top: 1em;
+  border-top: 1px solid var(--line);
+}
+
+.mentionsHead {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mentionsTitle {
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.count {
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--paper-2);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.mentionList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mention {
+  margin-bottom: 6px;
+}
+
+.mentionHead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 2px 4px;
+  border-radius: var(--radius-1);
+}
+
+.mentionHead:hover {
+  background: var(--paper-1);
+}
+
+.mentionFold {
+  width: 22px;
+  height: 22px;
+}
+
+.mentionTopic {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.mentionTopic:hover {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mentionWhy {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.dots {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.dotOn,
+.dotOff {
+  width: 10px;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.dotOn {
+  background: var(--ink-2);
+}
+
+.dotOff {
+  background: var(--line);
+}
+
+.mentionBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 4px 0 8px 32px;
+  padding: 10px 12px;
+  border-radius: var(--radius-1);
+  background: var(--paper-1);
+  font-size: var(--text-md);
+}
+
+.noteLinkTag {
+  margin-left: auto;
+  padding: 0 7px;
+  border: 1px solid var(--graph-edge-note);
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.mentionBody .inlineLink {
+  align-self: flex-start;
+}
+
+/* Narrow panes (a split view, a small window): tighter property labels, no gutter arrows. */
+@container (max-width: 34rem) {
+  .prop {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+  }
+
+  .propKey svg {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    --gutter: 1rem;
+    padding-top: 1.5rem;
+  }
+
+  .prop {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .fold {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}

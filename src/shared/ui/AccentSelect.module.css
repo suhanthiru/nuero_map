@@ -1,0 +1,39 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.option:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.option[aria-checked="true"] {
+  border-color: var(--ink-2);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.option[aria-checked="true"] .swatch {
+  box-shadow: 0 0 0 2px var(--paper-0), 0 0 0 3px var(--ink-2);
+}

@@ -1,0 +1,195 @@
+/* Notes explorer */
+.treeArea {
+  flex: 1;
+  min-height: 3rem;
+  border-radius: var(--radius-1);
+}
+
+/* Dropping on the empty space moves to the top level. */
+.dropRoot {
+  outline: 1px dashed var(--accent-text);
+  outline-offset: -1px;
+}
+
+.row {
+  border-radius: var(--radius-1);
+}
+
+/* The folder a drag would drop into, with everything shown inside it. */
+.dropTarget {
+  background: var(--selection);
+}
+
+.chevron {
+  flex: none;
+  color: var(--muted);
+}
+
+/* An imported note's file type, like a notes app shows non-markdown files. */
+.ext {
+  flex: none;
+  padding: 0 4px;
+  border-radius: 3px;
+  background: var(--paper-2);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.renameRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 2px 6px;
+}
+
+.renameRow .chevron {
+  margin-top: 5px;
+}
+
+.nameField {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.row > .nameField {
+  padding: 2px 6px;
+}
+
+.nameInput {
+  width: 100%;
+  padding: 2px 6px;
+  border: 1px solid var(--accent-text);
+  border-radius: var(--radius-1);
+  background: var(--paper-0);
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+
+.nameInput[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.nameError {
+  font-size: var(--text-xs);
+  color: var(--danger);
+}
+
+.emptyPane {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 0 6px 8px;
+}
+
+.emptyPane > p {
+  padding: 4px 6px;
+}
+
+/* Note page */
+.noteMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: -0.2em 0 1.5em;
+  padding-bottom: 0.75em;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.noteBody {
+  min-height: 40vh;
+}
+
+/* Dialogs */
+.confirm {
+  width: min(28rem, 92vw);
+}
+
+.importDialog {
+  width: min(34rem, 92vw);
+  max-height: 80vh;
+}
+
+.dialogBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding: 12px 16px 16px;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.dialogBody p {
+  margin: 0;
+}
+
+.dialogActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.field select,
+.field textarea {
+  padding: 6px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-1);
+  background: var(--paper-0);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.field textarea {
+  resize: vertical;
+  font-family: var(--font-mono, monospace);
+}
+
+.pathForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skipList {
+  margin: 0;
+  padding-left: 1.2em;
+  max-height: 10rem;
+  overflow-y: auto;
+}
+
+.skipList code {
+  font-size: var(--text-xs);
+}
+
+.errorText {
+  color: var(--danger);
+}

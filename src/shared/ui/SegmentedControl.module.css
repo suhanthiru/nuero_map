@@ -1,0 +1,46 @@
+.group {
+  display: inline-flex;
+  padding: 2px;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-2);
+  background: var(--paper-2);
+}
+
+.item {
+  padding: 4px 10px;
+  border: 0;
+  border-radius: calc(var(--radius-2) - 2px);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.item:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.item:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.selected {
+  background: var(--paper-1);
+  color: var(--ink);
+  box-shadow: var(--shadow-1);
+}
+
+.sm .item {
+  padding: 2px 8px;
+  font-size: var(--text-xs);
+}
+
+.item[data-value="active"].selected {
+  color: var(--state-active);
+}
+
+.item[data-value="parked"].selected {
+  color: var(--state-parked);
+}

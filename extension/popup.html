@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Neural Map</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body class="popup">
+    <main>
+      <h1>Neural Map: Gemini capture</h1>
+      <dl id="status" class="status"></dl>
+      <div class="actions">
+        <button id="open-options" type="button" class="primary">Settings</button>
+        <button id="snapshot" type="button" aria-describedby="snapshot-hint">Save page snapshot</button>
+      </div>
+      <p id="snapshot-hint" class="hint">
+        Downloads an anonymized copy of this Gemini page's structure, with all text replaced, to help
+        fix the extension when Gemini changes its page.
+      </p>
+      <p id="snapshot-result" class="result" role="status"></p>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

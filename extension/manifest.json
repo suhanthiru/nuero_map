@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Neural Map - Gemini capture",
+  "version": "0.1.0",
+  "description": "Sends your finished Gemini turns to the Neural Map app running on this computer.",
+  "minimum_chrome_version": "120",
+  "permissions": ["storage", "alarms"],
+  "host_permissions": ["http://127.0.0.1/*"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "js": ["selectors.js", "core.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Neural Map: Gemini capture",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "externally_connectable": {
+    "ids": []
+  }
+}

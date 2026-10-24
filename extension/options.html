@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neural Map: Gemini capture</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Neural Map: Gemini capture</h1>
+      <p class="lede">
+        Sends your finished Gemini turns to the Neural Map app on this computer (127.0.0.1 only).
+      </p>
+
+      <section aria-labelledby="pairing-heading">
+        <h2 id="pairing-heading">Pairing</h2>
+        <ol id="pairing-steps">
+          <li>In Neural Map, open Settings, Pair browser extension. Turn it on and copy the pairing string.</li>
+          <li>Paste it below and choose Test connection.</li>
+        </ol>
+        <label for="pairing">Pairing string</label>
+        <div class="row">
+          <input
+            id="pairing"
+            type="password"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="nm1:47831:…"
+            aria-describedby="pairing-steps pairing-error"
+          />
+          <button id="reveal" type="button" aria-pressed="false" aria-controls="pairing">Show</button>
+        </div>
+        <p id="pairing-error" class="field-error" role="alert"></p>
+        <div class="actions">
+          <button id="test" type="button" class="primary">Test connection</button>
+        </div>
+        <p id="test-result" class="result" role="status"></p>
+      </section>
+
+      <section aria-labelledby="capture-heading">
+        <h2 id="capture-heading">Capture</h2>
+        <div class="check">
+          <input id="enabled" type="checkbox" aria-describedby="enabled-hint" />
+          <label for="enabled">Capture Gemini chats</label>
+        </div>
+        <p id="enabled-hint" class="hint">
+          Every finished turn on screen is sent, including older chats you open. Gemini doesn't show
+          when a message was written, so older turns are saved with today's date.
+        </p>
+        <div class="check">
+          <input id="send-titles" type="checkbox" aria-describedby="titles-hint" />
+          <label for="send-titles">Send chat titles</label>
+        </div>
+        <p id="titles-hint" class="hint">When off, chats arrive without their Gemini title.</p>
+      </section>
+
+      <section aria-labelledby="status-heading">
+        <h2 id="status-heading">Status</h2>
+        <dl id="status" class="status"></dl>
+      </section>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>
